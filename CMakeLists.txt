@@ -31,6 +31,8 @@ find_package(PCL REQUIRED)
 add_message_files(
   FILES
   YoloResult.msg
+  Detection2D.msg
+  Detection2DArray.msg
 )
 
 generate_messages(

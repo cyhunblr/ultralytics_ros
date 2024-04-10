@@ -106,7 +106,7 @@ void TrackerWithCloudNode::projectCloud(const pcl::PointCloud<pcl::PointXYZ>::Pt
 }
 
 void TrackerWithCloudNode::processPointsWithBbox(const pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud,
-                                                 const vision_msgs::Detection2D& detection,
+                                                 const ultralytics_ros::Detection2D& detection,
                                                  pcl::PointCloud<pcl::PointXYZ>::Ptr& detection_cloud_raw)
 {
   for (const auto& point : cloud->points)

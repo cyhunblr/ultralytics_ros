@@ -23,8 +23,8 @@ import roslib.packages
 import rospy
 from sensor_msgs.msg import Image
 from ultralytics import YOLO
-from vision_msgs.msg import Detection2D, Detection2DArray, ObjectHypothesisWithPose
-from ultralytics_ros.msg import YoloResult
+from vision_msgs.msg import ObjectHypothesisWithPose
+from ultralytics_ros.msg import YoloResult, Detection2D, Detection2DArray
 
 
 class TrackerNode:
@@ -91,11 +91,15 @@ class TrackerNode:
 
     def create_detections_array(self, results):
         detections_msg = Detection2DArray()
+        track_ids = results[0].boxes.id
         bounding_box = results[0].boxes.xywh
         classes = results[0].boxes.cls
         confidence_score = results[0].boxes.conf
-        for bbox, cls, conf in zip(bounding_box, classes, confidence_score):
+        if track_ids is None:
+            track_ids = [0]
+        for bbox, cls, conf, track_id in zip(bounding_box, classes, confidence_score, track_ids):
             detection = Detection2D()
+            detection.track_id = int(track_id)
             detection.bbox.center.x = float(bbox[0])
             detection.bbox.center.y = float(bbox[1])
             detection.bbox.size_x = float(bbox[2])

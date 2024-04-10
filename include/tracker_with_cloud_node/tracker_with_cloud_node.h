@@ -24,10 +24,12 @@
 #include <std_msgs/Header.h>
 #include <visualization_msgs/Marker.h>
 #include <visualization_msgs/MarkerArray.h>
-#include <vision_msgs/Detection2DArray.h>
 #include <vision_msgs/Detection3D.h>
 #include <vision_msgs/Detection3DArray.h>
+
 #include <ultralytics_ros/YoloResult.h>
+#include <ultralytics_ros/Detection2D.h>
+
 #include <geometry_msgs/TransformStamped.h>
 #include <tf2_ros/transform_listener.h>
 #include <message_filters/subscriber.h>
@@ -89,7 +91,7 @@ public:
                     vision_msgs::Detection3DArray& detections3d_msg,
                     sensor_msgs::PointCloud2& combine_detection_cloud_msg);
   void processPointsWithBbox(const pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud,
-                             const vision_msgs::Detection2D& detection,
+                             const ultralytics_ros::Detection2D& detection,
                              pcl::PointCloud<pcl::PointXYZ>::Ptr& detection_cloud_raw);
   void processPointsWithMask(const pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud, const sensor_msgs::Image& mask,
                              pcl::PointCloud<pcl::PointXYZ>::Ptr& detection_cloud_raw);
